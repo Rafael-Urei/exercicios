@@ -1,0 +1,95 @@
+:root {
+    --primary-color: rgb(5, 59, 95);
+    --title-color: rgb(138, 241, 207);
+    --font-family: Arial;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    outline: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--primary-color);
+    font-family: var(--font-family);
+    color: var(--primary-color);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+}
+
+article h1 {
+    display: block;
+    margin: 10px 10px 0px 0px;
+    font-size: 0.95em;
+}
+
+.container article {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 0px 20px 0px;
+}
+
+.container article div {
+    line-height: 1.5em;
+}
+
+article ul>li {
+    font-size: 0.95em;
+    margin: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0px 10px 0px;
+}
+
+form input {
+    margin: 5px 0px 10px 0px;
+    font-size: 24px;
+    height: 40px;
+}
+
+form input:focus {
+    outline: 1px solid var(--primary-color);
+}
+
+button {
+    border-style: none;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1em;
+    padding: 10px;
+    border-radius: 2px;
+    transition: 500ms;
+}
+
+button:hover {
+    background-color: rgb(233, 103, 17);
+}
+
+.result {
+    border-radius: 2px;
+    background-color: rgb(65, 134, 224);
+    color: white;
+    font-weight: 700;
+    padding: 0px 20px 0px 20px;
+}
