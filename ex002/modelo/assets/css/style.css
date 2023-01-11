@@ -89,7 +89,16 @@ button:hover {
 .result {
     border-radius: 2px;
     background-color: rgb(65, 134, 224);
+}
+
+.valid-p, .invalid-p {
+    text-align: center;
     color: white;
+    background-color: rgb(88, 226, 150);
+    padding: 10px 20px;
     font-weight: 700;
-    padding: 0px 20px 0px 20px;
+}
+
+.invalid-p {
+    background-color: rgb(255, 117, 147);
 }

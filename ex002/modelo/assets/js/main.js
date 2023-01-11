@@ -1,48 +1,78 @@
-const results = document.querySelector('.result');
 const mainFunction = () => {
     const form = document.querySelector('.form');
-    const event = (event) => {
+    form.addEventListener('submit', (event) => {
         event.preventDefault();
-        const peso = form.querySelector('#peso');
-        const altura = form.querySelector('#altura');
-        const persondata = {
-            peso: Number(peso.value),
-            altura: Number(altura.value),
-        };
-        console.log(persondata);
-        const pes = persondata.peso;
-        const alt = persondata.altura*persondata.altura;
-        if (pes && alt) {
-            const results = document.querySelector('.result');
-            const imc = pes/alt;
-            if (imc >= 0 && imc < 18.5) {
-                results.innerHTML = `IMC de ${imc}. Você está abaixo do peso!`;
-                results.style.background = 'rgba(243, 13, 52, 0.897)';
-            };
-            if (imc >= 18.5 && imc < 25) {
-                results.innerHTML = `IMC de ${imc}. Você está com o Peso normal!`
-                results.style.background = 'rgb(40, 214, 107)';
-            };
-            if (imc >= 25 && imc < 30) {
-                results.innerHTML = `IMC de ${imc}. Você está com Sobrepeso!`
-                results.style.background = 'rgb(238, 202, 41)'
-            }
-            if (imc >= 30 && imc < 35) {
-                results.innerHTML = `IMC de ${imc}. Você está com Obesidade grau 1!`
-                results.style.background = 'rgb(233, 103, 17)';
-            }
-            if (imc >= 35 && imc < 40) {
-                results.innerHTML = `IMC de ${imc}. Você está com Obesidade grau 2!`
-                results.style.background = 'rgba(243, 13, 52, 0.897)';
-            }
-            if (imc >= 40) {
-                results.innerHTML = `IMC de ${imc}. Você está com Obesidade grau 3!`
-                results.style.background = 'black';
-            }
-        } else {
-            results.innerHTML = 'Error!'
+        const peso = event.target.querySelector('#peso');
+        const altura = event.target.querySelector('#altura');
+        
+        const weigth = Number(peso.value);
+        const height = Number(altura.value);
+        
+        if (!weigth) {
+            setResult('Wrong Weigth!', false)
+            return;
         }
+        if (!height) {
+            setResult('Wrong Height', false)
+            return;
+        }
+
+        const imc = getImc(weigth, height);
+        console.log(imc);
+
+        const levelimc = getNivelimc(imc);
+        console.log(levelimc);
+
+        const msg = `Seu IMC é de ${imc}: ${levelimc}`;
+
+        setResult(msg, true);
+    });
+
+    const getNivelimc = (imc) => {
+        const level = ['Abaixo do peso', 'Peso normal', 'Sobrepeso', 'Obesidade grau 1', 'Obesidade grau 2', 'Obesidade grau 3'];
+
+        if (imc >= 39.9) {
+            return level[5]
+        }
+        if (imc >= 34.9) {
+            return level[4]
+        }
+        if (imc >= 29.9) {
+            return level[3]
+        }
+        if (imc >= 24.9) {
+            return level[2]
+        }
+        if (imc >= 18.5) {
+            return level[1]
+        }
+        if (imc < 18.5){
+            return level[0]
+        }
+    }
+
+    const createP = () => {
+        const p = document.createElement('p');
+        return p;
     };
-    form.addEventListener('submit', event);
+    const setResult = (msg, isValid) => {
+        const result = document.querySelector('.result');
+        result.innerHTML = '';
+        const p = createP();
+
+        if (isValid) {
+            p.classList.add('valid-p');
+        } else {
+            p.classList.add('invalid-p');
+        }
+        p.innerHTML = msg;
+        result.appendChild(p);
+    };
+
+    const getImc = (weigth, height) => {
+        const imc = weigth / height ** 2;
+        return imc.toFixed(2);
+    }
 };
-mainFunction();
+
+mainFunction()
